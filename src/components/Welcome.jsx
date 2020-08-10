@@ -12,41 +12,24 @@ function Welcome() {
   function handleChange(event) {
 
     const {value, name} = event.target;
-    // const newValue = event.target.value;
-    // const inputName = event.target.name;
 
     setContact((prevValue) => {
-        if (name === "fName") {
-          return {
-            fName: value,
-            lName: prevValue.lName,
-            email: prevValue.email
-          }
-        } else if (name === "lName"){
-          return {
-            fName: prevValue.fName,
-            lName: value,
-            email: prevValue.email
-          }
-        } else {
-          return {
-            fName: prevValue.fName,
-            lName: prevValue.lName,
-            email: value
-          }
+        return {
+          ...prevValue, // to preserve prev values
+          [name]: value 
         }
     });
 
-    // if (inputName === "fName") {
-    //   setFullName({
-    //     fName: newValue,
-    //     lName: fullName.lName
-    //   });
-    // } else {
-    //   setFullName({
-    //     fName: fullName.fName,
-    //     lName: newValue
-    //   });
+    // The [name]:value without ES6
+    // let name = "fName";
+    // let obj = {};
+    // obj[name] = value;
+      //  => obj = {
+      //     fName: value
+      //    }
+    // return {
+    //   ...prevValue,
+    //   ...obj
     // }
   }
 
