@@ -3,12 +3,8 @@ import Input from "./Input";
 
 function Welcome() {
 
-  const [headingText, setHeadingText] = useState('Hello');
+  const [name, setName] = useState("");
   const [isMouseOver, setMouseOver] = useState(false);
-
-  function handleClick() {
-    setHeadingText('Hello World!');
-  }
 
   function handleMouseOver() {
     setMouseOver(true);
@@ -18,16 +14,31 @@ function Welcome() {
     setMouseOver(false);
   }
 
+  function handleChange(event) {
+    console.log(event.target.value);
+    setName(event.target.value);
+  }
+
+  function handleSubmit(event) {
+    event.preventDefault();
+  }
+
   return (
-    <div className = "container">
-      <h1>{headingText}</h1>
-      <Input type="text" placeholder="What's your name?"/>
-      <button 
+    <form onSubmit={(event) => {event.preventDefault()}}>
+      <h1>Hello {name}</h1>
+      <input 
+        onChange={handleChange} 
+        type="text" 
+        placeholder="What's your name?"
+        value={name}
+      />
+      <button
+        type="submit"
         style={{backgroundColor: isMouseOver ? "black" : "white"}}
-        onClick={handleClick} 
         onMouseOver={handleMouseOver} 
-        onMouseOut={handleMouseOut}>Submit</button>
-    </div>
+        onMouseOut={handleMouseOut}
+      >Submit</button>
+    </form>
   );
 }
 

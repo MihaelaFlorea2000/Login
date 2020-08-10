@@ -16,7 +16,9 @@ let userIsRegistered = true;
 
 function App() {
   return (
-    <Welcome />
+    <div className="container">
+      <Welcome />
+    </div>
   );
 }
 
