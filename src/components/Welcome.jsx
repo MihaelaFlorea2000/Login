@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import Input from "./Input";
 
 function Welcome() {
 
-  const [fullName, setFullName] = useState({
+  const [contact, setContact] = useState({
     fName: "",
-    lName: ""
+    lName: "",
+    email: ""
   });
   const [isMouseOver, setMouseOver] = useState(false);
 
@@ -15,16 +15,24 @@ function Welcome() {
     // const newValue = event.target.value;
     // const inputName = event.target.name;
 
-    setFullName((prevValue) => {
+    setContact((prevValue) => {
         if (name === "fName") {
           return {
             fName: value,
-            lName: prevValue.lName
+            lName: prevValue.lName,
+            email: prevValue.email
+          }
+        } else if (name === "lName"){
+          return {
+            fName: prevValue.fName,
+            lName: value,
+            email: prevValue.email
           }
         } else {
           return {
             fName: prevValue.fName,
-            lName: value
+            lName: prevValue.lName,
+            email: value
           }
         }
     });
@@ -44,20 +52,25 @@ function Welcome() {
 
   return (
     <form onSubmit={(event) => {event.preventDefault()}}>
-      <h1>Hello {fullName.fName} {fullName.lName}</h1>
+      <h1>Hello {contact.fName} {contact.lName}</h1>
+      <p>{contact.email}</p>
       <input 
         name="fName"
-        onChange={handleChange} 
-        type="text" 
+        onChange={handleChange}
         placeholder="What's your first name?"
-        value={fullName.fName}
+        value={contact.fName}
       />
       <input
         name = "lName"
         onChange={handleChange} 
-        type="text" 
         placeholder="What's your last name?"
-        value={fullName.lName}
+        value={contact.lName}
+      />
+      <input
+        name = "email"
+        onChange={handleChange} 
+        placeholder="What's your email?"
+        value={contact.email}
       />
       <button
         type="submit"
